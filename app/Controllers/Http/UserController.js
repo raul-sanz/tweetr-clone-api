@@ -12,11 +12,11 @@ class UserController {
       
       const user = await User.create(userData)
       
-      //const token = await auth.generate(user)
+      const token = await auth.generate(user)
 
       return response.json({
           status: 'success',
-          data: user
+          data: token
       })
     } catch (error) {
         return response.status(400).json({
@@ -27,16 +27,21 @@ class UserController {
   }
 
   async login({request, response, auth}){
-    
+    try {
       const token = await auth.attempt(
         request.input('email'),
         request.input('password')
       )
-      return response.status(200).json({
+      return response.json({
         status: 'success',
         data: token
       })
-   
+    } catch (error) {
+      return response.status(400).json({
+        status: 'error',
+        message: 'Invalid email/password'
+      })
+    }
   }
 
   async me ({response, auth}){
