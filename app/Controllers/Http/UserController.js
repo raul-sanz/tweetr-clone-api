@@ -27,7 +27,7 @@ class UserController {
   }
 
   async login({request, response, auth}){
-    try {
+    
       const token = await auth.attempt(
         request.input('email'),
         request.input('password')
@@ -36,12 +36,7 @@ class UserController {
         status: 'success',
         data: token
       })
-    } catch (error) {
-      return response.status(400).json({
-        status: 'error',
-        message: 'Invalid email/password'
-      })
-    }
+   
   }
 
   async me ({response, auth}){
