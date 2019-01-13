@@ -12,11 +12,11 @@ class UserController {
       
       const user = await User.create(userData)
       
-      const token = await auth.generate(user)
+      //const token = await auth.generate(user)
 
       return response.json({
           status: 'success',
-          data: token
+          data: user
       })
     } catch (error) {
         return response.status(400).json({
