@@ -32,7 +32,7 @@ class UserController {
         request.input('email'),
         request.input('password')
       )
-      return response.json({
+      return response.status(200).json({
         status: 'success',
         data: token
       })
